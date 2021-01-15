@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="icon" href="/icon.ico" type="image/x-ico">
+        <title>Short Links Generator</title>
+    </head>
+
+    <body>
+        <div style="padding: 30px;">
+            <a href="/" class="text-decoration-none text-muted d-flex align-items-center">
+                <h1>Short Links</h1>
+                <div class="mx-3">
+                    <img src="/url.png" alt="icon"/>
+                </div>
+            </a>
+
+            <form action="/V1/Utilities/Shortlink" method="POST" class="my-4 form-inline">
+                <div class="mb-3">
+                    <label for="link" class="form-label">Add New Link</label>
+                    <input required placeholder="your link" type="url" name="link" id="link" class="form-control col mr-2">
+                </div>
+                <button class="btn btn-success" type="submit">Convert</button>
+            </form>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <caption>Links list</caption>
+                    <thead>
+                        <tr>
+                            <th id="uuid">UUID</th>
+                            <th id="link">Original Link</th>
+                            <th id="short">Short URL</th>
+                            <th id="clicks">Visits</th>
+                            <th id="action">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(request => { %>
+                            <tr>
+                                <td><%= request.uuid %></td>
+                                <td><%= request.originalLink %></td>
+                                <td><a href="<%= request.shortLink %>" target="_blank"><%= request.shortLink %></a></td>
+                                <td><%= request.clicks %></td>
+                                <td>
+                                    <form class="d-flex justify-content-center" action="/V1/Utilities/DeleteShortlink" method="POST">
+                                        <button type="submit" name="shortlink" id="shortlink" class="btn btn-danger" value="<%= request.shortLink %>">
+                                            <em class="fas fa-trash" style="cursor: pointer;"></em>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+            </div>
+                    
+        </div>
+
+        <script src="https://kit.fontawesome.com/49e86edb82.js" crossorigin="anonymous"></script>
+    </body>
+</html>

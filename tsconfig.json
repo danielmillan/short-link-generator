@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "outDir": "build",
+      "sourceMap": true,
+      "noImplicitAny": false,
+      "typeRoots": [ "./types", "./node_modules/@types" ],
+      "types": [
+          "node",
+          "reflect-metadata"
+      ],
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true
+  },
+  "exclude": [ "node_modules", "typings", "tests" ]
+}
